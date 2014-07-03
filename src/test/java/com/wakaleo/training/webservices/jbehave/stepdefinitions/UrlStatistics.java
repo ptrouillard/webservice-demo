@@ -13,10 +13,7 @@ import org.jbehave.core.annotations.When;
  * Date: 16/04/2014
  * Time: 11:36 AM
  */
-public class UrlStatistics {
-
-    @Steps
-    UrlShortenerSteps urlShortenerSteps;
+public class UrlStatistics extends UrlShortenerSteps {
 
     @Steps
     WebUser webUser;
@@ -24,7 +21,7 @@ public class UrlStatistics {
     String shortUrl;
     @Given("I have registered a shortened URL for $longUrl")
     public void givenIHaveRegisteredAShortenedURLFor(String longUrl) {
-        shortUrl = urlShortenerSteps.shorten(longUrl);
+        shortUrl = shorten(longUrl);
     }
 
     @Given("it has been clicked $n times")

@@ -10,13 +10,10 @@ import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
-public class ProcessingUrls {
+public class ProcessingUrls extends UrlShortenerSteps {
 
     String providedUrl;
     String returnedMessage;
-
-    @Steps
-    UrlShortenerSteps urlShortener;
 
     @Given("a url <providedUrl>")
     @Alias("a url $providedUrl")
@@ -26,22 +23,22 @@ public class ProcessingUrls {
 
     @When("I request the shortened form of this url")
     public void shortenUrl() {
-        returnedMessage = urlShortener.shorten(providedUrl);
+        returnedMessage = shorten(providedUrl);
     }
 
     @When("I request the expanded form of this url")
     public void expandUrl() {
-        returnedMessage = urlShortener.expand(providedUrl);
+        returnedMessage = expand(providedUrl);
     }
 
     @Then("the shortened form should be <expectedUrl>")
     public void shortenedFormShouldBe(String expectedUrl) throws JSONException {
-        urlShortener.response_should_contain_shortened_url(returnedMessage, expectedUrl);
+        response_should_contain_shortened_url(returnedMessage, expectedUrl);
     }
 
     @Then("the long form should be <expectedUrl>")
     public void longFormShouldBe(String expectedUrl) throws JSONException {
-        urlShortener.response_should_contain_long_url(returnedMessage, expectedUrl);
+        response_should_contain_long_url(returnedMessage, expectedUrl);
     }
 
     @Then("I should obtain the following JSON message: $expectedJSONMessage")
